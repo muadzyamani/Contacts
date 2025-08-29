@@ -5,11 +5,7 @@ public class Contacts0 {
 
     public static void main(String[] args) {
         final Scanner SCANNER = new Scanner(System.in);
-        System.out.println("|| ===================================================");
-        System.out.println("|| ===================================================");
-        System.out.println("|| Contacts - Version 0.0");
-        System.out.println("|| Welcome to Contacts!");
-        System.out.println("|| ===================================================");
+        printWelcomeMessage();
         String[][] list = new String[100][3];
         int count = 0;
         while (true) {
@@ -76,20 +72,7 @@ public class Contacts0 {
                             decodeResult[0], decodeResult[1], decodeResult[2]);
                     break;
                 case "list":
-                    String[][] toBeDisplayed = list;
-                    final StringBuilder messageAccumulator = new StringBuilder();
-                    for (int i = 0; i < count; i++) {
-                        final String[] person = toBeDisplayed[i];
-                        final int displayIndex = i + 1;
-                        messageAccumulator.append('\t').append(String.format("%1$d. ", displayIndex))
-                                .append(String.format("%1$s  Phone Number: %2$s  Email: %3$s", person[0], person[1], person[2]))
-                                .append(System.lineSeparator()).append("|| ");
-                    }
-                    String listAsString = messageAccumulator.toString();
-                    for (String m1 : new String[]{listAsString}) {
-                        System.out.println("|| " + m1);
-                    }
-                    feedback = String.format("%1$d persons found!", count);
+                    feedback = getList(list, count);
                     break;
                 case "clear":
                     list = new String[100][3];
@@ -144,6 +127,33 @@ public class Contacts0 {
                 System.out.println("|| " + m);
             }
         }
+    }
+
+    private static String getList(String[][] list, int count) {
+        String feedback;
+        String[][] toBeDisplayed = list;
+        final StringBuilder messageAccumulator = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            final String[] person = toBeDisplayed[i];
+            final int displayIndex = i + 1;
+            messageAccumulator.append('\t').append(String.format("%1$d. ", displayIndex))
+                    .append(String.format("%1$s  Phone Number: %2$s  Email: %3$s", person[0], person[1], person[2]))
+                    .append(System.lineSeparator()).append("|| ");
+        }
+        String listAsString = messageAccumulator.toString();
+        for (String m1 : new String[]{listAsString}) {
+            System.out.println("|| " + m1);
+        }
+        feedback = String.format("%1$d persons found!", count);
+        return feedback;
+    }
+
+    private static void printWelcomeMessage() {
+        System.out.println("|| ===================================================");
+        System.out.println("|| ===================================================");
+        System.out.println("|| Contacts - Version 0.1");
+        System.out.println("|| Welcome to Contacts!");
+        System.out.println("|| ===================================================");
     }
 
 }
